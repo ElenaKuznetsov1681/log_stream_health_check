@@ -27,3 +27,10 @@ A stream that has **never** emitted reads as stale with a distinct reason (`"no 
 The `grace_seconds` parameter exists because real loggers batch. Set it to absorb flush boundaries so a five-second interval does not flap a status page red on a one-second batch delay. The healthy boundary is inclusive: `now == last_emit + interval + grace` is still healthy.
 
 Tests inject a fake clock rather than relying on wall time, so `check()` behaviour is deterministic regardless of machine speed.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
