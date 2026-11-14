@@ -1,6 +1,6 @@
 [project]
 name = "log-stream-health-check"
-version = "0.1.1"
+version = "0.1.2"
 description = "Logging handler that tracks last record emitted and reports stream staleness via check()"
 requires-python = ">=3.10"
 dependencies = []
